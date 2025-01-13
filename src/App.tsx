@@ -9,6 +9,7 @@ function App() {
       <h1>Hello World!</h1>
 
       <Temp username='hello' password='worlds?' />
+      <h1>hi shahar</h1>
     </div>
   );
 }
