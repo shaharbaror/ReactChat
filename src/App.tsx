@@ -7,7 +7,8 @@ function App() {
   return (
     <div className='App'>
       <h1>Hello World!</h1>
-      <Temp />
+
+      <Temp username='hello' password='worlds?' />
     </div>
   );
 }
