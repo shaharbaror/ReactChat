@@ -32,18 +32,25 @@ const MessageCreator = ({ userName }: { userName: string }) => {
   };
 
   return (
-    <div>
+    <div className='message-creator'>
       <input
         type='text'
         value={userInput}
         onChange={(e) => setUserInput(e.target.value)}
+        className='message-creator-input'
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            SendMessage();
+          }
+        }}
       />
       <button
         onClick={() => {
           SendMessage();
         }}
+        className='message-creator-button'
       >
-        Send to server
+        Send
       </button>
     </div>
   );

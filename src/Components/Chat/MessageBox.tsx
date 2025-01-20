@@ -25,7 +25,7 @@ const MessageBox = ({
       key={`message-${key}`}
     >
       <div className='message-box-wrapper'>
-        <h1 className='message-box-username'>{message.username}</h1>
+        <h1 className='message-box-username'>{message.username}:</h1>
         <div className='message-box'>
           <p className='message-box-message'>{displayedMessage}</p>
         </div>

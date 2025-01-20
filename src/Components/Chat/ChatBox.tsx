@@ -3,11 +3,13 @@ import "../../CSS/ChatBox.css";
 
 import MessageGetter from "./MessageGetter.tsx";
 import MessageCreator from "./MessageCreator.tsx";
-const username = "TestUser";
+const username = "Ido";
 const ChatBox = () => {
   return (
     <div className='ChatBox'>
-      <h1>Chat Box</h1>
+      <div className='ChatBox-header'>
+        <h1>Chat Box</h1>
+      </div>
       <MessageGetter userName={username} />
       <MessageCreator userName={username} />
     </div>
