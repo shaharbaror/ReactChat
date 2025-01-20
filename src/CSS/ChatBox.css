@@ -1,0 +1,7 @@
+.ChatBox {
+  height: 700px;
+  width: 1000px;
+  background-color: gray;
+  border-radius: 15px;
+  padding: 20px;
+}
