@@ -5,3 +5,42 @@
   border-radius: 15px;
   padding: 20px;
 }
+.message-wrapper {
+  display: flex;
+
+  justify-content: flex-end;
+  height: 100%;
+  width: 100%;
+  margin-top: 20px;
+}
+.other-message {
+  justify-content: flex-start;
+}
+.other-message .message-box {
+  background-color: lightgray;
+}
+
+.message-box-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.message-box {
+  height: 100%;
+  overflow-y: none;
+
+  width: 100px;
+
+  background-color: lightgreen;
+  border-radius: 15px;
+  padding: 5px;
+}
+.message-box-username {
+  font-size: 15px;
+  line-height: 1px;
+}
+
+.message-box-message {
+  font-size: 17px;
+
+  margin: 0px 0px 0px 5px;
+}

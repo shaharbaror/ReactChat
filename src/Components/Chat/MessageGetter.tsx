@@ -1,7 +1,9 @@
 import React from "react";
 
+import MessageBox from "./MessageBox.tsx";
+
 import { useState } from "react";
-const MessageGetter = () => {
+const MessageGetter = ({ userName }: { userName: string }) => {
   const [userInput, setUserInput] = useState([{ message: "", username: "" }]);
   const [serverResponse, setServerResponse] = useState("");
 
@@ -28,10 +30,15 @@ const MessageGetter = () => {
       <div id='MessageGetter'>
         {userInput.map((message, i) => {
           return (
-            <div key={`message-${i}`}>
-              <h1>{message.username}</h1>
-              <p>{message.message}</p>
-            </div>
+            // <div key={`message-${i}`}>
+            //   <h1>{message.username}</h1>
+            //   <p>{message.message}</p>
+            // </div>
+            <MessageBox
+              message={message}
+              key={i}
+              isOther={message.username === userName}
+            />
           );
         })}
       </div>
