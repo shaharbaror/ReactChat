@@ -1,11 +1,22 @@
 const express = require("express"); // Use require for CommonJS modules
+const cors = require("cors");
 const app = express();
 
+app.use(cors());
 // Middleware to parse JSON
 app.use(express.json());
 
 app.get("/hi", (req, res) => {
   res.send("Hello World");
+});
+
+app.post("/", (req, res) => {
+  const { message } = req.body;
+  console.log(`Received message: ${message}`);
+
+  // Process the message and send a response
+  const responseMessage = `Server received: ${message} successfully`;
+  res.json({ message: responseMessage });
 });
 
 // this is an example of how to send a JSON response back to the client
