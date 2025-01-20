@@ -8,7 +8,8 @@ const ChatBox = () => {
   return (
     <div className='ChatBox'>
       <div className='ChatBox-header'>
-        <h1>Chat Box</h1>
+        <img src={require("../../Images/logo.jpg")} alt='ChiChat Logo' />
+        <h1>ChiChat Box</h1>
       </div>
       <MessageGetter userName={username} />
       <MessageCreator userName={username} />

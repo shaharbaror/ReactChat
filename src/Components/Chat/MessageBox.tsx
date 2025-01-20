@@ -6,10 +6,12 @@ const MessageBox = ({
   message,
   key,
   isOther,
+  isShowName,
 }: {
   message: messageBox;
   key: number;
   isOther: boolean;
+  isShowName: boolean;
 }) => {
   const [displayedMessage, setDisplayedMessage] = useState("");
   const [messageSize, setMessageSize] = useState(255);
@@ -25,7 +27,9 @@ const MessageBox = ({
       key={`message-${key}`}
     >
       <div className='message-box-wrapper'>
-        <h1 className='message-box-username'>{message.username}:</h1>
+        {isShowName && (
+          <h1 className='message-box-username'>{message.username}:</h1>
+        )}
         <div className='message-box'>
           <p className='message-box-message'>{displayedMessage}</p>
         </div>

@@ -5,6 +5,7 @@ import MessageBox from "./MessageBox.tsx";
 import { useState, useEffect } from "react";
 const MessageGetter = ({ userName }: { userName: string }) => {
   const [userInput, setUserInput] = useState([{ message: "", username: "" }]);
+  let lastmessage = "";
 
   useEffect(() => {
     // first get all the messages from the chat
@@ -40,11 +41,16 @@ const MessageGetter = ({ userName }: { userName: string }) => {
   return (
     <div id='MessageGetter' className='message-getter-wrapper'>
       {userInput.map((message, i) => {
+        let isShowName = lastmessage !== message.username;
+        if (isShowName) {
+          lastmessage = message.username;
+        }
         return (
           <MessageBox
             message={message}
             key={i}
             isOther={message.username === userName}
+            isShowName={isShowName}
           />
         );
       })}
