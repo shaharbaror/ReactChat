@@ -13,8 +13,39 @@ let messages = [
   },
 ];
 
+let clients = new Map();
+
+async function addMessage(message) {
+  await messages.push(message);
+}
+
 app.get("/GetMessage", (req, res) => {
+  // check if the client has already requested to get all the messages
+  const clientId = req.query.clientId;
+  if (clientId && !clients.has(clientId)) {
+    clients.set(clientId, messages[messages.length - 1]);
+    res.json({ message: messages });
+    return;
+  }
+  if (clients.get(clientId) !== messages[messages.length - 1]) {
+    res.json({ message: messages });
+    clients.set(clientId, messages[messages.length - 1]);
+    return;
+  }
+  res.json({ message: "no new messages" });
+});
+
+// the same as getMessage but it will return the message even if it is the same as the last one
+app.get("/GetMessageForce", (req, res) => {
+  const clientId = req.query.clientId;
+  if (clientId && !clients.has(clientId)) {
+    clients.set(clientId, messages[messages.length - 1]);
+    res.json({ message: messages });
+    return;
+  }
+
   res.json({ message: messages });
+  clients.set(clientId, messages[messages.length - 1]);
 });
 
 app.get("/hi", (req, res) => {
