@@ -1,14 +1,16 @@
 const express = require("express"); // Use require for CommonJS modules
 const cors = require("cors");
 const app = express();
+const summarizeChat = require("./summarizeChat");
 
 app.use(cors());
 // Middleware to parse JSON
+app.use("/server", summarizeChat);
 app.use(express.json());
 
 let messages = [
   {
-    username: "jhon",
+    username: "john",
     message: "hello",
   },
 ];
@@ -54,6 +56,7 @@ app.post("/", (req, res) => {
     console.log(message.purpose);
     if (message.purpose === "addMessage") {
       messages.push(message.content);
+
       console.log(message);
     }
   }
