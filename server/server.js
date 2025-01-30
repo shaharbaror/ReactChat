@@ -54,7 +54,6 @@ app.post("/", (req, res) => {
     console.log(message.purpose);
     if (message.purpose === "addMessage") {
       messages.push(message.content);
-
       console.log(message);
     }
   }
