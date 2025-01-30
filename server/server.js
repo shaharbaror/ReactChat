@@ -8,7 +8,7 @@ app.use(express.json());
 
 let messages = [
   {
-    username: "john",
+    username: "jhon",
     message: "hello",
   },
 ];
@@ -48,10 +48,6 @@ app.get("/GetMessageForce", (req, res) => {
   clients.set(clientId, messages[messages.length - 1]);
 });
 
-app.get("/hi", (req, res) => {
-  res.send("Hello World");
-});
-
 app.post("/", (req, res) => {
   const { message } = req.body;
   if (message.purpose) {
@@ -71,16 +67,6 @@ app.post("/", (req, res) => {
     const responseMessage = `Server received: ${message} successfully`;
     res.json({ message: responseMessage });
   }
-});
-
-// this is an example of how to send a JSON response back to the client
-app.get("/api/users", (req, res) => {
-  // Send a JSON response back to the client
-  res.json([
-    { id: 1, firstName: "John", lastName: "Doe", email: "john@example.com" },
-    { id: 2, firstName: "Jane", lastName: "Doe", email: "jane@example.com" },
-    { id: 3, firstName: "Jim", lastName: "Beam", email: "jim@example.com" },
-  ]);
 });
 
 app.listen(3000, () => {
