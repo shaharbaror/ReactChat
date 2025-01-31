@@ -57,7 +57,7 @@ app.post("/", (req, res) => {
 
   if (message.purpose) {
       console.log(message.purpose);
-      //added a check to see if a message is empty and avoids adding a empty message box if so
+      //a check to see if a message is empty, if it is we dont add a message box
       if (message.purpose === "addMessage" && message.content.message.length != 0) { 
           messages.push(message.content);
           console.log(message);
