@@ -54,22 +54,24 @@ app.get("/hi", (req, res) => {
 
 app.post("/", (req, res) => {
   const { message } = req.body;
-  if (message.purpose) {
-    console.log(message.purpose);
-    if (message.purpose === "addMessage") {
-      messages.push(message.content);
 
-      console.log(message);
-    }
+  if (message.purpose) {
+      console.log(message.purpose);
+      //added a check to see if a message is empty and avoids adding a empty message box if so
+      if (message.purpose === "addMessage" && message.content.message.length != 0) { 
+          messages.push(message.content);
+          console.log(message);
+      }
   }
+
   console.log(`Received message: ${message}`);
 
   if (message === "GetMessage") {
-    res.json({ message: messages });
+      res.json({ message: messages });
   } else {
-    // Process the message and send a response
-    const responseMessage = `Server received: ${message} successfully`;
-    res.json({ message: responseMessage });
+      // Process the message and send a response
+      const responseMessage = `Server received: ${message} successfully`;
+      res.json({ message: responseMessage });
   }
 });
 
@@ -81,6 +83,15 @@ app.get("/api/users", (req, res) => {
     { id: 2, firstName: "Jane", lastName: "Doe", email: "jane@example.com" },
     { id: 3, firstName: "Jim", lastName: "Beam", email: "jim@example.com" },
   ]);
+});
+
+
+const path = require("path");
+
+app.use(express.static(path.join(__dirname, "../build")));
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../build", "index.html"));
 });
 
 app.listen(3000, () => {
