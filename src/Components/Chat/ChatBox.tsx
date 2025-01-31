@@ -3,12 +3,12 @@ import "../../CSS/ChatBox.css";
 
 import MessageGetter from "./MessageGetter.tsx";
 import MessageCreator from "./MessageCreator.tsx";
-const username = "Ido";
+const username = "Shachar";
 const ChatBox = () => {
   return (
-    <div className='ChatBox'>
-      <div className='ChatBox-header'>
-        <img src={require("../../Images/logo.jpg")} alt='ChiChat Logo' />
+    <div className="ChatBox">
+      <div className="ChatBox-header">
+        <img src={require("../../Images/logo.jpg")} alt="ChiChat Logo" />
         <h1>ChiChat Box</h1>
       </div>
       <MessageGetter userName={username} />
