@@ -22,16 +22,16 @@ const MessageBox = ({
 
   return (
     <div
-      id='MessageBox'
+      id="MessageBox"
       className={`message-wrapper ${isOther ? "" : "other-message"}`}
       key={`message-${key}`}
     >
-      <div className='message-box-wrapper'>
+      <div className="message-box-wrapper">
         {isShowName && (
-          <h1 className='message-box-username'>{message.username}:</h1>
+          <h1 className="message-box-username">{message.username}:</h1>
         )}
-        <div className='message-box'>
-          <p className='message-box-message'>{displayedMessage}</p>
+        <div className="message-box">
+          <p className="message-box-message">{displayedMessage}</p>
         </div>
         {message.message.length > messageSize ? (
           <p

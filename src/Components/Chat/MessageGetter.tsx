@@ -39,7 +39,7 @@ const MessageGetter = ({ userName }: { userName: string }) => {
     }
   };
   return (
-    <div id='MessageGetter' className='message-getter-wrapper'>
+    <div id="MessageGetter" className="message-getter-wrapper">
       {userInput.map((message, i) => {
         let isShowName = lastmessage !== message.username;
         if (isShowName) {
