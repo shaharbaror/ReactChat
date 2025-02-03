@@ -52,46 +52,25 @@ app.get("/GetMessageForce", (req, res) => {
 
 app.post("/", (req, res) => {
   const { message } = req.body;
-
   if (message.purpose) {
-      console.log(message.purpose);
-      //a check to see if a message is empty, if it is we dont add a message box
-      if (message.purpose === "addMessage" && message.content.message.length != 0) { 
-          messages.push(message.content);
-          console.log(message);
-      }
-  }
+    console.log(message.purpose);
+    if (message.purpose === "addMessage") {
+      messages.push(message.content);
 
+      console.log(message);
+    }
+  }
   console.log(`Received message: ${message}`);
 
   if (message === "GetMessage") {
-      res.json({ message: messages });
+    res.json({ message: messages });
   } else {
-      // Process the message and send a response
-      const responseMessage = `Server received: ${message} successfully`;
-      res.json({ message: responseMessage });
+    // Process the message and send a response
+    const responseMessage = `Server received: ${message} successfully`;
+    res.json({ message: responseMessage });
   }
 });
 
-// Example API route to return user data
-app.get("/api/users", (req, res) => {
-    res.json([
-        { id: 1, firstName: "John", lastName: "Doe", email: "john@example.com" },
-        { id: 2, firstName: "Jane", lastName: "Doe", email: "jane@example.com" },
-        { id: 3, firstName: "Jim", lastName: "Beam", email: "jim@example.com" },
-    ]);
-});
-
-const path = require("path");
-
-// Serve static files from the React frontend
-app.use(express.static(path.join(__dirname, "../build")));
-
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../build", "index.html"));
-});
-
-// Start the server
 app.listen(3000, () => {
-    console.log("Server is running on port http://localhost:3000");
+  console.log("Server is running on port http://localhost:3000");
 });
