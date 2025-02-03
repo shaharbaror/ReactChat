@@ -1,11 +1,14 @@
 const express = require("express"); // Use require for CommonJS modules
 const cors = require("cors");
 const app = express();
-const summarizeChat = require("./summarizeChat");
+
+const { db } = require("./talkWithFirebase.js");
+
+//const summarizeChat = require("./summarizeChat");
 
 app.use(cors());
 // Middleware to parse JSON
-app.use("/server", summarizeChat);
+//app.use("/server", summarizeChat);
 app.use(express.json());
 
 let messages = [
@@ -15,34 +18,18 @@ let messages = [
   },
 ];
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-require("dotenv").config();
-
-const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID,
-  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
-};
-
-// Initialize Firebase
-const fire_app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
 let clients = new Map();
 
 async function addMessage(message) {
-  await messages.push(message);
+  const docRef = db.collection("message").doc("alovelace");
+  await docRef.set({
+    username: message.username,
+    message: message.message,
+    time: 1815,
+  });
+
+  messages.push(message);
+  //db.ref("messages").set(messages);
 }
 
 app.get("/GetMessage", (req, res) => {
@@ -84,7 +71,7 @@ app.post("/", (req, res) => {
       message.purpose === "addMessage" &&
       message.content.message.length != 0
     ) {
-      messages.push(message.content);
+      addMessage(message.content);
       console.log(message);
     }
   }
@@ -99,25 +86,6 @@ app.post("/", (req, res) => {
     res.json({ message: responseMessage });
   }
 });
-
-// Example API route to return user data
-app.get("/api/users", (req, res) => {
-  res.json([
-    { id: 1, firstName: "John", lastName: "Doe", email: "john@example.com" },
-    { id: 2, firstName: "Jane", lastName: "Doe", email: "jane@example.com" },
-    { id: 3, firstName: "Jim", lastName: "Beam", email: "jim@example.com" },
-  ]);
-});
-
-const path = require("path");
-
-// Serve static files from the React frontend
-app.use(express.static(path.join(__dirname, "../build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build", "index.html"));
-});
-
 // Start the server
 app.listen(3000, () => {
   console.log("Server is running on port http://localhost:3000");
